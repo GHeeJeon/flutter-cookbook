@@ -39,7 +39,7 @@ class _RandomWordsState extends State<RandomWords> {
           }
           return ListTile(
             title: Text(
-              _suggestions[index].asPascalCase,
+              _suggestions[index].asSnakeCase,
               style: _biggerFont,
             ),
           );
