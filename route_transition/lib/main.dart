@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 void main() {
   runApp(
     const MaterialApp(
+	  //debugShowCheckedModeBanner: false,
       home: Page1(),
     ),
   );
@@ -33,14 +34,17 @@ Route _createRoute() {
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
 	const begin = Offset(0.0, 1.0);
   	const end = Offset.zero;
-	var curve = Curves.easeInOutQuint;
+	const curve = Curves.easeInOutQuint;
 
-	var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-
+	final tween = Tween(begin: begin, end: end);
+  	final curvedAnimation = CurvedAnimation(
+    	parent: animation,
+    	curve: curve,
+  	);
 	return SlideTransition(
-	  position: animation.drive(tween),
-	  child: child,
-	  );
+    	position: tween.animate(curvedAnimation),
+    	child: child,
+		);
 	},
   );
 }
